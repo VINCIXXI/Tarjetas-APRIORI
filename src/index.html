@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APRIORI</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="kanban-head">
+            <strong class="kanban-head-title">Tarjetas APRIORI</strong>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="group-apiladas col">
+                    <img class="group-1" alt="" src="./img/subcard-apilada3.png">
+                    <img class="group-2" alt="" src="./img/subcard-apilada2.png">
+                    <img class="group-3" alt="" src="./img/subcard-apilada1.png">
+                    <img class="group-4" alt="" src="./img/subcard-apilada4.png">
+                    <div class="generar-card" id="generar-card">
+                        <img class="image-apriori-cards" alt="" src="./img/apriori-ppal.png">
+                    </div>
+                </div>
+                <div class="cardorden" id="cardorden">
+                    
+                </div>
+            </div>
+            
+            <div class="kanban-table col-8">
+                <div class="parent" id="si-tengo">
+                    <div class="kanban-block" >
+                        <b>Si la tengo</b>
+                        <div class="frame-verde">
+                        </div>
+                    </div>
+                </div>
+                <div class="parent" id="medio-tengo">
+                    <div class="kanban-block">
+                        <b>Si tengo mas o menos</b>
+                        <div class="frame-amarillo">
+                        </div>
+                    </div>
+                </div>
+                <div class="parent" id="no-tengo">
+                    <div class="kanban-block" >
+                        <b>No la tengo</b>
+                        <div class="frame-rojo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/scripts.js"></script>
+</body>
+</html>
