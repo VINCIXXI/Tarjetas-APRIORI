@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const previewContainer = document.getElementById('cardorden');
     const columns = document.querySelectorAll('.parent');
 
+    // Contadores de tarjetas
+    const siTengoCount = document.getElementById('si-tengo-count');
+    const medioTengoCount = document.getElementById('medio-tengo-count');
+    const noTengoCount = document.getElementById('no-tengo-count');
+ 
+
     // Array con los títulos de las tarjetas
     const cardTitles = [
         { title: "Orientado a la acción", imageSrc1: require("../img/1Card-front.png"), imageSrc2: require("../img/1Card-back.png" )},
@@ -94,6 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
         return { card: cardTitles[randomIndex], index: randomIndex };
     }
 
+    // Función para actualizar los contadores
+    function updateCounters() {
+        siTengoCount.textContent = document.querySelectorAll('#si-tengo .card').length;
+        medioTengoCount.textContent = document.querySelectorAll('#medio-tengo .card').length;
+        noTengoCount.textContent = document.querySelectorAll('#no-tengo .card').length;
+    }
+
+    // Inicializa los contadores
+    updateCounters();
+
+
     // Evento al hacer clic en el botón
     generateButton.addEventListener('click', function () {
         const cardData = getRandomCardTitle();
@@ -134,6 +151,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     showDetailView(cardData.card.imageSrc1, cardData.card.imageSrc2);
                 }
             });
+            // Actualizar contadores después de agregar una nueva tarjeta
+            updateCounters();
         }
     });
 
@@ -148,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         card.addEventListener('dragend', function () {
             card.classList.remove('hide'); // Mostrar la tarjeta nuevamente
+            updateCounters(); // Actualizar contadores después de arrastrar
         });
     }
 
@@ -173,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const card = document.getElementById(cardId); // Obtener la tarjeta por ID
             column.appendChild(card);
             
+            updateCounters(); // Actualizar contadores después de soltar
         });
     });
 

@@ -72,7 +72,15 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content:flex-start;
+  justify-content: space-between; /* Distribuye el contenido entre los extremos */
+}
+
+/*Numeros que muestra cantidad de cartas en cada columna*/
+.card-count {
+  margin-left: auto; /* Empuja el contador hacia la derecha */
+  padding-left: 10px; /* Espacio entre el texto y el contador */
+  font-size: 2rem; /* Ajusta el tamaño de la fuente según sea necesario */
+  color: #000; /* Color del texto del contador */
 }
 
 #si-tengo {
