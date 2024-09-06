@@ -147,9 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             previewContainer.classList.remove('hide');
     
             newCard.addEventListener('click', function () {
-                if (newCard.parentElement.id === 'cardorden') {
-                    showDetailView(cardData.card.imageSrc1, cardData.card.imageSrc2);
-                }
+                showDetailView(cardData.card.imageSrc1, cardData.card.imageSrc2);
             });
             // Actualizar contadores después de agregar una nueva tarjeta
             updateCounters();
