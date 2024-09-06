@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Array con los títulos de las tarjetas
     const cardTitles = [
-        { title: "Orientado a la acción", imageSrc1: require("../img/1Card-front.png"), imageSrc2: require("../img/1Card-back.png" )},
+        { title: "Orientado a la acción", imageSrc1: require("../img/1Card-front.png"), imageSrc2: require("../img/1Card-back.png" )},        
         { title: "Manejo de situaciones ambiguas", imageSrc1: require("../img/2Card-front.png"), imageSrc2: require("../img/2Card-back.png" )},
         { title: "Accesibilidad", imageSrc1: require("../img/3Card-front.png"), imageSrc2: require("../img/3Card-back.png" )},
         { title: "Relación con jefes", imageSrc1: require("../img/4Card-front.png"), imageSrc2: require("../img/4Card-back.png" )},
@@ -175,6 +175,13 @@ document.addEventListener('DOMContentLoaded', function () {
     columns.forEach(column => {
         column.addEventListener('dragover', function (e) {
             e.preventDefault(); // Prevenir el comportamiento por defecto
+            const afterElement = getDragAfterElement(column, e.clientY);
+            const draggable = document.querySelector('.dragging');
+            if (afterElement == null) {
+                column.appendChild(draggable);
+            } else {
+                column.insertBefore(draggable, afterElement);
+            }
         });
 
         column.addEventListener('dragenter', function (e) {
@@ -188,15 +195,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
         column.addEventListener('drop', function (e) {
             column.classList.remove('hovered');
-            
             const cardId = e.dataTransfer.getData('text/plain'); // Obtener el ID de la tarjeta arrastrada
             const card = document.getElementById(cardId); // Obtener la tarjeta por ID
-            column.appendChild(card);
-            
+            const afterElement = getDragAfterElement(column, e.clientY);
+            if (afterElement == null) {
+                column.appendChild(card);
+            } else {
+                column.insertBefore(card, afterElement);
+            }
             updateCounters(); // Actualizar contadores después de soltar
         });
     });
 
+
+    // Función para obtener el elemento después del cual se debe insertar la tarjeta arrastrada
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.card:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
     
     // Función para mostrar la vista de detalle
     function showDetailView(imageSrc1, imageSrc2) {
